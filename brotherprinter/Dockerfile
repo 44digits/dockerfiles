@@ -44,5 +44,8 @@ RUN useradd \
 # Copy the default configuration file
 COPY --chown=root:lp cupsd.conf /etc/cups/cupsd.conf
 
+WORKDIR /install
+COPY linux-brprinter-installer-* /install/linux-brprinter-installer.gz
+
 # Default shell
 CMD ["/usr/sbin/cupsd", "-f"]
