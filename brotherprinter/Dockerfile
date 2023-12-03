@@ -8,6 +8,12 @@ FROM debian:stable-slim
 MAINTAINER $MAINTAINER
 
 # Install Packages (basic tools, cups, basic drivers, HP drivers)
+#  hpijs-ppds \
+#  hp-ppd \
+#  hplip \
+#  smbclient \
+#  printer-driver-cups-pdf \
+
 RUN apt-get update \
 && apt-get install -y \
   sudo \
@@ -20,11 +26,6 @@ RUN apt-get update \
   foomatic-db-compressed-ppds \
   printer-driver-all \
   openprinting-ppds \
-  hpijs-ppds \
-  hp-ppd \
-  hplip \
-  smbclient \
-  printer-driver-cups-pdf \
 && apt-get clean \
 && rm -rf /var/lib/apt/lists/*
 
