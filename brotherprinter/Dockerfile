@@ -27,7 +27,6 @@ RUN apt-get update \
   printer-driver-all \
   openprinting-ppds \
   expect \
-  wget \
 && apt-get clean \
 && rm -rf /var/lib/apt/lists/*
 
