@@ -14,8 +14,8 @@ MAINTAINER $MAINTAINER
 #  smbclient \
 #  printer-driver-cups-pdf \
 
-RUN apt-get update \
-&& apt-get install -y \
+RUN apt update \
+&& apt install -y \
   sudo \
   whois \
   usbutils \
@@ -26,9 +26,7 @@ RUN apt-get update \
   foomatic-db-compressed-ppds \
   printer-driver-all \
   openprinting-ppds \
-  expect \
-&& apt-get clean \
-&& rm -rf /var/lib/apt/lists/*
+  expect
 
 # Add user and disable sudo password checking
 RUN useradd \
@@ -43,8 +41,13 @@ RUN useradd \
 # Copy the default configuration file
 COPY --chown=root:lp cupsd.conf /etc/cups/cupsd.conf
 
-WORKDIR /install
-COPY linux-brprinter-installer-* /install/linux-brprinter-installer.gz
+COPY script_edit.exp /tmp/script_edit.exp
+COPY linux-brprinter-installer-* /tmp/linux-brprinter-installer.gz
+RUN gunzip /tmp/linux-brprinter-installer.gz
+
+# cleanup
+RUN apt clean \
+    && rm -rf /var/lib/apt/lists/*
 
 # Default shell
 CMD ["/usr/sbin/cupsd", "-f"]
