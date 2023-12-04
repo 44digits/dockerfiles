@@ -19,11 +19,12 @@ Installation steps:
 1. Build container with:  `docker build -t cupsbrother .`
 1. Launch container with: `docker run -d -p 631:631 -v /var/run/dbus:/var/run/dbus --name cupsbrother cupsbrother`
 1. Client/host setup:
-
+    ```
     sudo apt install cups-client
     sudo systemctl stop cups.service
     sudo systemctl disable cups.service
     sudo echo "ServerName 127.0.0.1:631" > /etc/cups/client.conf
+    ```
 
 1. View cups config here: http://localhost:631
 1. Test that printers are available with `lpstat -v`
