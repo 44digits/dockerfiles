@@ -1,5 +1,5 @@
 # Foobar
-Create a `jupyter lab` server with an additional python2 kernel.  
+A `jupyter lab` server with an additional python2 kernel.
 Used for working through the **Google Foobar Challenge**.
 
 Build container with:
