@@ -50,7 +50,8 @@ RUN /usr/sbin/cupsd \
 
 # Cleanup
 RUN apt clean \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && rm /tmp/*.deb
 
 # Default shell
 CMD ["/usr/sbin/cupsd", "-f"]
