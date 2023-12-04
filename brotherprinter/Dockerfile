@@ -8,12 +8,6 @@ FROM debian:stable-slim
 MAINTAINER $MAINTAINER
 
 # Install Packages (basic tools, cups, basic drivers, HP drivers)
-#  hpijs-ppds \
-#  hp-ppd \
-#  hplip \
-#  smbclient \
-#  printer-driver-cups-pdf \
-
 RUN apt update \
     && apt install -y \
         sudo \
