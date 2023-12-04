@@ -26,7 +26,8 @@ RUN apt update \
   foomatic-db-compressed-ppds \
   printer-driver-all \
   openprinting-ppds \
-  expect
+  expect \
+  curl
 
 # Add user and disable sudo password checking
 RUN useradd \
@@ -41,13 +42,19 @@ RUN useradd \
 # Copy the default configuration file
 COPY --chown=root:lp cupsd.conf /etc/cups/cupsd.conf
 
-COPY script_edit.exp /tmp/script_edit.exp
-COPY linux-brprinter-installer-* /tmp/linux-brprinter-installer.gz
-RUN gunzip /tmp/linux-brprinter-installer.gz
+# Install brother printer drivers
+WORKDIR /tmp
+COPY brprinter_install.exp brprinter_install.exp
+COPY linux-brprinter-installer-* linux-brprinter-installer.gz
+RUN gunzip linux-brprinter-installer.gz
+RUN /usr/sbin/cupsd \
+    && expect brprinter_install.exp \
+    && until [ -f /etc/cups/printers.conf ] ; do sleep 5; done
+#RUN /usr/sbin/cupsd && lpadmin -p MFCL2710DW -v socket://192.168.1.50 -E
 
-# cleanup
-RUN apt clean \
-    && rm -rf /var/lib/apt/lists/*
+# Cleanup
+#RUN apt clean \
+#    && rm -rf /var/lib/apt/lists/*
 
 # Default shell
 CMD ["/usr/sbin/cupsd", "-f"]
