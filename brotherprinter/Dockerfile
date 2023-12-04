@@ -15,29 +15,29 @@ MAINTAINER $MAINTAINER
 #  printer-driver-cups-pdf \
 
 RUN apt update \
-&& apt install -y \
-  sudo \
-  whois \
-  usbutils \
-  cups \
-  cups-client \
-  cups-bsd \
-  cups-filters \
-  foomatic-db-compressed-ppds \
-  printer-driver-all \
-  openprinting-ppds \
-  expect \
-  curl
+    && apt install -y \
+        sudo \
+        whois \
+        usbutils \
+        cups \
+        cups-client \
+        cups-bsd \
+        cups-filters \
+        foomatic-db-compressed-ppds \
+        printer-driver-all \
+        openprinting-ppds \
+        expect \
+        curl
 
 # Add user and disable sudo password checking
 RUN useradd \
-  --groups=sudo,lp,lpadmin \
-  --create-home \
-  --home-dir=/home/print \
-  --shell=/bin/bash \
-  --password=$(mkpasswd print) \
-  print \
-&& sed -i '/%sudo[[:space:]]/ s/ALL[[:space:]]*$/NOPASSWD:ALL/' /etc/sudoers
+    --groups=sudo,lp,lpadmin \
+    --create-home \
+    --home-dir=/home/print \
+    --shell=/bin/bash \
+    --password=$(mkpasswd print) \
+    print \
+    && sed -i '/%sudo[[:space:]]/ s/ALL[[:space:]]*$/NOPASSWD:ALL/' /etc/sudoers
 
 # Copy the default configuration file
 COPY --chown=root:lp cupsd.conf /etc/cups/cupsd.conf
@@ -50,7 +50,6 @@ RUN gunzip linux-brprinter-installer.gz
 RUN /usr/sbin/cupsd \
     && expect brprinter_install.exp \
     && until [ -f /etc/cups/printers.conf ] ; do sleep 5; done
-#RUN /usr/sbin/cupsd && lpadmin -p MFCL2710DW -v socket://192.168.1.50 -E
 
 # Cleanup
 #RUN apt clean \
