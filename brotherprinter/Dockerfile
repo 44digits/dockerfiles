@@ -52,8 +52,8 @@ RUN /usr/sbin/cupsd \
     && until [ -f /etc/cups/printers.conf ] ; do sleep 5; done
 
 # Cleanup
-#RUN apt clean \
-#    && rm -rf /var/lib/apt/lists/*
+RUN apt clean \
+    && rm -rf /var/lib/apt/lists/*
 
 # Default shell
 CMD ["/usr/sbin/cupsd", "-f"]
