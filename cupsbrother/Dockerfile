@@ -37,6 +37,9 @@ RUN useradd \
 COPY --chown=root:lp cupsd.conf /etc/cups/cupsd.conf
 
 # Install brother printer drivers
+#   cupsd needs to be running when printer driver is installed
+#   cupsd does not immediately generate/update the printers.conf
+#       wait until it is created before finishing
 WORKDIR /tmp
 COPY brprinter_install.exp brprinter_install.exp
 COPY linux-brprinter-installer-* linux-brprinter-installer.gz
