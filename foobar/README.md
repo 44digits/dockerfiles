@@ -1,5 +1,7 @@
 # Foobar
-A `jupyter lab` server with an additional python2 kernel.
+A `jupyter lab` server with an additional Python2 kernel.
+Python2 is no longer available in the Debian repos so it
+is compiled from source.
 Used for working through the **Google Foobar Challenge**.
 
 Build container with:
