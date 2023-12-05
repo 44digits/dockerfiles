@@ -13,7 +13,7 @@ RUN apt -y install \
         python3-pip \
         zlib1g-dev
 
-# install python2 from source
+# Install python2 from source
 RUN curl https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tgz -o python2.tgz
 RUN tar -xvzf python2.tgz \
     && cd Python-2.7.18 \
@@ -26,15 +26,15 @@ RUN tar -xvzf python2.tgz \
 RUN curl https://bootstrap.pypa.io/pip/2.7/get-pip.py -o get-pip2.py
 RUN python2 get-pip2.py
 
-# python2 libraries
+# Install python2 libraries
 RUN pip2 install ipykernel pylint flake8
 RUN python2 -m ipykernel install
 
-# python3 libraries
+# Install python3 libraries
 #   use flag to install system wide
 RUN pip3 install --break-system-packages jupyterlab
 
-# cleanup
+# Cleanup
 RUN apt clean \
     && rm -rf \
         Python-2.7.18 \
