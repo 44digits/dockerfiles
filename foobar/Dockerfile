@@ -31,6 +31,7 @@ RUN pip2 install ipykernel pylint flake8
 RUN python2 -m ipykernel install
 
 # python3 libraries
+#   use flag to install system wide
 RUN pip3 install --break-system-packages jupyterlab
 
 CMD [ "/usr/local/bin/jupyter", "lab", "--allow-root", "--notebook-dir=/code/notebooks", "--ServerApp.token=''", "--ServerApp.password=''", "--ip=0.0.0.0", "--no-browser"]
