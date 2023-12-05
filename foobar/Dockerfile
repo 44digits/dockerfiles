@@ -7,7 +7,6 @@ RUN apt-get update
 
 RUN apt -y install \
         curl \
-        # libffi-dev \
         python2 \
         python3 \
         python3-distutils \
