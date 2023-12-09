@@ -1,11 +1,9 @@
-# CUPS Docker container
-# Original Docker file from:
-#   https://github.com/olbat/dockerfiles/blob/master/cupsd/Dockerfile.stable
-#   license GPL v3: https://github.com/olbat/dockerfiles/blob/master/LICENSE
+# Scanner container
 
-ARG MAINTAINER
+ARG SCANNERIP=192.168.1.50
+ARG SCANNERMODEL=MFC-L2710DW
+ARG SCANNERNAME=Brother-MFCL2710DW
 FROM debian:stable-slim
-MAINTAINER $MAINTAINER
 
 # Install Packages (basic tools, cups, basic drivers, HP drivers)
 RUN apt update \
@@ -21,8 +19,7 @@ RUN apt update \
 WORKDIR /tmp
 COPY brscan4*.amd64.deb brscan4.amd64.deb
 RUN dpkg -i --force-all brscan4.amd64.deb
-RUN brsaneconfig4 -a name=Brother-MFCL2710DW model=MFC-L2710DW ip=192.168.1.50
-
+RUN brsaneconfig4 -a name=$SCANNERNAME model=$SCANNERMODEL ip=$SCANNERIP
 
 # Cleanup
 RUN apt clean \
