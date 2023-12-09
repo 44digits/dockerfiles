@@ -1,8 +1,5 @@
 # Scanner container
 
-ARG SCANNERIP=192.168.1.50
-ARG SCANNERMODEL=MFC-L2710DW
-ARG SCANNERNAME=Brother-MFCL2710DW
 FROM debian:stable-slim
 
 # Install Packages (basic tools, cups, basic drivers, HP drivers)
@@ -16,6 +13,10 @@ RUN apt update \
 
 # Install brother scanner drivers
 #   https://help.brother-usa.com/app/answers/detail/a_id/164930/~/install-the-scanner-driver-%28deb%29---linux
+ARG SCANNERIP=192.168.1.50
+ARG SCANNERMODEL=MFC-L2710DW
+ARG SCANNERNAME=Brother-MFCL2710DW
+
 WORKDIR /tmp
 COPY brscan4*.amd64.deb brscan4.amd64.deb
 RUN dpkg -i --force-all brscan4.amd64.deb
