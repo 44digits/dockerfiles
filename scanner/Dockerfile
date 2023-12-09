@@ -10,48 +10,24 @@ MAINTAINER $MAINTAINER
 # Install Packages (basic tools, cups, basic drivers, HP drivers)
 RUN apt update \
     && apt install -y \
-        sudo \
-        whois \
-        usbutils \
-        cups \
-        cups-client \
-        cups-bsd \
-        cups-filters \
-        foomatic-db-compressed-ppds \
-        printer-driver-all \
-        openprinting-ppds \
-        expect \
-        curl
+        dpkg \
+        gimp \
+        imagemagick \
+        sane \
+        sane-utils
 
-# Add user and disable sudo password checking
-RUN useradd \
-    --groups=sudo,lp,lpadmin \
-    --create-home \
-    --home-dir=/home/print \
-    --shell=/bin/bash \
-    --password=$(mkpasswd print) \
-    print \
-    && sed -i '/%sudo[[:space:]]/ s/ALL[[:space:]]*$/NOPASSWD:ALL/' /etc/sudoers
-
-# Copy the default configuration file
-COPY --chown=root:lp cupsd.conf /etc/cups/cupsd.conf
-
-# Install brother printer drivers
-#   cupsd needs to be running when printer driver is installed
-#   cupsd does not immediately generate/update the printers.conf
-#       wait until it is created before finishing
+# Install brother scanner drivers
+#   https://help.brother-usa.com/app/answers/detail/a_id/164930/~/install-the-scanner-driver-%28deb%29---linux
 WORKDIR /tmp
-COPY brprinter_install.exp brprinter_install.exp
-COPY linux-brprinter-installer-* linux-brprinter-installer.gz
-RUN gunzip linux-brprinter-installer.gz
-RUN /usr/sbin/cupsd \
-    && expect brprinter_install.exp \
-    && until [ -f /etc/cups/printers.conf ] ; do sleep 5; done
+COPY brscan4*.amd64.deb brscan4.amd64.deb
+RUN dpkg -i --force-all brscan4.amd64.deb
+RUN brsaneconfig4 -a name=Brother-MFCL2710DW model=MFC-L2710DW ip=192.168.1.50
+
 
 # Cleanup
 RUN apt clean \
     && rm -rf /var/lib/apt/lists/* \
     && rm /tmp/*.deb
 
-# Default shell
-CMD ["/usr/sbin/cupsd", "-f"]
+# Infinite loop
+CMD ["tail", "-f", "/dev/null"]
