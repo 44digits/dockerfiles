@@ -9,7 +9,9 @@ RUN apt update \
         gimp \
         imagemagick \
         sane \
-        sane-utils
+        sane-utils \
+        simple-scan \
+        xsane
 
 # Install brother scanner drivers
 #   https://help.brother-usa.com/app/answers/detail/a_id/164930/~/install-the-scanner-driver-%28deb%29---linux
