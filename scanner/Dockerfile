@@ -24,6 +24,8 @@ COPY brscan4*.amd64.deb brscan4.amd64.deb
 RUN dpkg -i --force-all brscan4.amd64.deb
 RUN brsaneconfig4 -a name=$SCANNERNAME model=$SCANNERMODEL ip=$SCANNERIP
 
+RUN usermod -a -G scanner root
+
 # Cleanup
 RUN apt clean \
     && rm -rf /var/lib/apt/lists/* \
