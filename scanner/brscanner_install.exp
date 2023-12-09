@@ -1,0 +1,28 @@
+#!/usr/bin/expect -f
+# expect script for Brother Driver Install Tool
+
+set send_slow {1 .1}
+set timeout -1
+
+spawn bash /tmp/linux-brprinter-installer
+expect "Input model name ->"
+send -- "MFC-L2710DW\r"
+expect "OK* ->"
+send -- "y\r"
+expect "Do you agree?* ->"
+send -- "\r"
+expect "Will you specify the Device URI?* ->"
+send -- "\r"
+expect "select the number of destination Device URI* ->"
+send -- "8\r"
+expect "enter IP address ->"
+send -- "192.168.1.50\r"
+expect "Test Print?* ->"
+send -- "\r"
+expect "Do you agree?* ->"
+send -- "\r"
+expect "Do you agree?* ->"
+send -- "\r"
+expect "Hit Enter/Return key."
+send -- "\r"
+expect eof
