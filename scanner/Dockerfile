@@ -26,6 +26,12 @@ RUN brsaneconfig4 -a name=$SCANNERNAME model=$SCANNERMODEL ip=$SCANNERIP
 
 RUN usermod -a -G scanner root
 
+# install fujitsu SnapScan driver
+#   https://www.josharcher.uk/code/install-scansnap-s1300-drivers-linux/
+RUN mkdir /usr/share/sane/epjitsu
+COPY 300_0C00.nal /usr/share/sane/epjitsu/300_0C00.nal
+
+
 # Cleanup
 RUN apt clean \
     && rm -rf /var/lib/apt/lists/* \
