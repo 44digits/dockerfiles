@@ -270,13 +270,13 @@
                            <div class="WidgetTitle__Header-sc-ruy1gu-2 cCbZgt">Scanner control:</div>
                         </div>
                      </div>
-                     <form class="FormLayout__Container-sc-2kg2eg-0 iNyYeg" action="/scan" method="get">
+                     <form id="scannerform" class="FormLayout__Container-sc-2kg2eg-0 iNyYeg" action="/scan" method="post">
                         <div class="FieldsGrid__Grid-sc-1luipcv-0 hCmtez">
                            <div class="FieldsGrid__Row-sc-1luipcv-1 gRPRAW">
                               <div class="FormFieldLayout__Container-sc-1m85c11-3 hynaII">
                                  <label for="lq1allsw" class="FormFieldLayout__Label-sc-1m85c11-0 cyCFdL">Scanner</label>
                                  <div class="Dropdown__Container-sc-ducso2-2 fxHRJU">
-                                    <select id="lq1allsw" aria-required="false" class="Dropdown__Select-sc-ducso2-1 kQuqyo">
+                                    <select id="scanner" name="scanner" aria-required="false" class="Dropdown__Select-sc-ducso2-1 kQuqyo">
                                        <option value="Brother MFC-L2710DW">Brother MFC-L2710DW</option>
                                        <option value="Fujitsu ScanSnap S300">Fujitsu ScanSnap S300</option>
                                     </select>
@@ -296,7 +296,7 @@
                               <div class="FormFieldLayout__Container-sc-1m85c11-3 hynaII">
                                  <label for="lq1amq78" class="FormFieldLayout__Label-sc-1m85c11-0 cyCFdL">Paper</label>
                                  <div class="Dropdown__Container-sc-ducso2-2 fxHRJU">
-                                    <select id="lq1amq78" aria-required="false" class="Dropdown__Select-sc-ducso2-1 kQuqyo">
+                                    <select id="paper" name="paper" aria-required="false" class="Dropdown__Select-sc-ducso2-1 kQuqyo">
                                        <option value="Letter">Letter</option>
                                        <option value="Legal">Legal</option>
                                        <option value="Auto">Auto</option>
@@ -317,7 +317,7 @@
                               <div class="FormFieldLayout__Container-sc-1m85c11-3 hynaII">
                                  <label for="lq1amq78" class="FormFieldLayout__Label-sc-1m85c11-0 cyCFdL">DPI</label>
                                  <div class="Dropdown__Container-sc-ducso2-2 fxHRJU">
-                                    <select id="dpi" aria-required="false" class="Dropdown__Select-sc-ducso2-1 kQuqyo">
+                                    <select id="dpi" name="dpi" aria-required="false" class="Dropdown__Select-sc-ducso2-1 kQuqyo">
                                        <option value="300">300</option>
                                        <option value="200">200<option>
                                        <option value="150">150</option>
@@ -336,7 +336,7 @@
                            </div>
                         </div>
                         <div class="FieldsGrid__ButtonsGroup-sc-1luipcv-2 jGxUlg">
-                        <button aria-label="Submit" type="button" tabindex="0" class="ButtonBase__ButtonContainer-sc-p43e7i-3 euBiGU" style="border-radius: 4px; border-color: rgba(0, 0, 0, 0); color: rgb(255, 255, 255); font-family: inherit; font-weight: bold; font-size: 18px; font-style: normal; background-color: rgb(17, 85, 178); border-width: 2px;">
+                        <button form="scannerform" aria-label="Submit" type="submit" tabindex="0" class="ButtonBase__ButtonContainer-sc-p43e7i-3 euBiGU" style="border-radius: 4px; border-color: rgba(0, 0, 0, 0); color: rgb(255, 255, 255); font-family: inherit; font-weight: bold; font-size: 18px; font-style: normal; background-color: rgb(17, 85, 178); border-width: 2px;">
                             <span class="ButtonBase__Overlay-sc-p43e7i-4 jUXzLe" style="padding: 10px 25px; background-color: rgba(0, 0, 0, 0);">
                                 <span class="ButtonBase__Ellipsis-sc-p43e7i-5 dqiKFy">Scan</span>
                             </span>

@@ -7,14 +7,12 @@ app = flask.Flask(__name__)
 def index():
     return flask.render_template('index.html')
 
-@app.route("/scan", methods=["GET"])
+@app.route("/scan", methods=["POST"])
 def scan():
-    print(flask.request.args)
-
-    first = flask.request.args.get('fname', 'xx')
-    print(first)
-    last = flask.request.args.get('lname')
-    print(last)
+    print(flask.request.form.get('scanner'))
+    print(flask.request.form.get('paper'))
+    dpi = flask.request.form.get('dpi')
+    print(dpi)
 
     _cc = subprocess.run(["ls", "-l"], capture_output=True)
 
