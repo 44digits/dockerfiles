@@ -348,11 +348,14 @@
             </div>
          </div>
       </div>
-
       <div class="Content__WidgetContainer-sc-3sh3bs-2 RWsCS">
          <div style="min-height: 100%; box-shadow: none; border-radius: 24px; padding: 40px;" class="WidgetBackground__Container-sc-1ho7q3r-0 hsrHoI">
-             Line1<br>
-            Line2<br>
+             <h2>Scanned items:</h2>
+             <ul>
+                {% for _file in filelist %}
+                <li><a href="{{ filepath }}/{{ _file|e }}">{{ _file|e }}</a></li>
+                {% endfor %}
+             </ul>
         </div>
       </div>
    </body>
