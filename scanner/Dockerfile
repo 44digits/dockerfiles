@@ -8,6 +8,8 @@ RUN apt update \
         dpkg \
         gimp \
         imagemagick \
+        python3 \
+        python3-pip \
         sane \
         sane-utils \
         simple-scan \
@@ -31,11 +33,17 @@ RUN usermod -a -G scanner root
 RUN mkdir /usr/share/sane/epjitsu
 COPY 300_0C00.nal /usr/share/sane/epjitsu/300_0C00.nal
 
-
 # Cleanup
 RUN apt clean \
     && rm -rf /var/lib/apt/lists/* \
     && rm /tmp/*.deb
 
+WORKDIR /app
+COPY requirements.txt .
+COPY flask/app.py .
+COPY flask/templates templates
+RUN pip3 install -r requirements.txt
+
+
 # Infinite loop
-CMD ["tail", "-f", "/dev/null"]
+CMD ["gunicorn", "-b", "0.0.0.0:8888", "app:app"]
