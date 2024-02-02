@@ -1,0 +1,11 @@
+services:
+  brotherscanner:
+    container_name: brotherscanner
+    build: .
+    image: debian:stable-slim
+    ports:
+      - "8888:8888"
+    command: gunicorn --bind 0.0.0.0:8888 app:app
+
+
+
