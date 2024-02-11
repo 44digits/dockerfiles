@@ -42,7 +42,7 @@ WORKDIR /app
 COPY requirements.txt .
 COPY flask/app.py .
 COPY flask/templates templates
-RUN pip3 install -r requirements.txt
+RUN pip3 install -r requirements.txt --break-system-packages
 
 
 # Infinite loop
