@@ -1,7 +1,9 @@
 import flask
 import subprocess
+import logging
 
 app = flask.Flask(__name__)
+app.logger.setLevel(logging.DEBUG)
 
 @app.route("/")
 def index():
@@ -12,6 +14,9 @@ def index():
 
 @app.route("/scan", methods=["POST"])
 def scan():
+    app.logger.info("info")
+    app.logger.debug("debug")
+
     print(flask.request.form.get('scanner'))
     print(flask.request.form.get('paper'))
     dpi = flask.request.form.get('dpi')
