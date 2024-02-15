@@ -24,13 +24,13 @@ ARG SCANNERNAME=Brother-MFCL2710DW
 WORKDIR /tmp
 COPY brscan4*.amd64.deb brscan4.amd64.deb
 RUN dpkg -i --force-all brscan4.amd64.deb
-RUN brsaneconfig4 -a name=$SCANNERNAME model=$SCANNERMODEL ip=$SCANNERIP
+#RUN brsaneconfig4 -a name=$SCANNERNAME model=$SCANNERMODEL ip=$SCANNERIP
 
 RUN usermod -a -G scanner root
 
 # install fujitsu SnapScan driver
 #   https://www.josharcher.uk/code/install-scansnap-s1300-drivers-linux/
-RUN mkdir /usr/share/sane/epjitsu
+RUN mkdir -p /usr/share/sane/epjitsu
 COPY 300_0C00.nal /usr/share/sane/epjitsu/300_0C00.nal
 
 # Cleanup
