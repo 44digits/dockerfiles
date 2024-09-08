@@ -22,5 +22,6 @@ alias qcad="xhost +local:docker \
         qcad"
 ```
 Where `<userdirectory>` is your home directory.
+Create `.qcad` directory for config: `mkdir ~/.qcad`
 
 Execute with: `qcad`
