@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM debian:stable
 ARG USER_ID=1000
 ARG QCAD_DIR=/usr/local/share/qcad
 
