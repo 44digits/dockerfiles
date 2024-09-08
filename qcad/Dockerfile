@@ -6,19 +6,18 @@ WORKDIR /tmp
 RUN groupadd --gid "$USER_ID" qcad \
     && useradd -ms /bin/bash --gid "$USER_ID" --uid "$USER_ID" qcad
 
-# update & install X11 libs needed by qcad
+# update & install X11, Qt libs needed by qcad
 #   wget needed to download
 RUN apt update \
     && apt --yes upgrade \
     && apt install --yes \
         libgl1 \
-        libglib2.0-0 \
         libx11-6 \
-        qt5-default \
+        qtwayland5 \
         wget \
     && apt clean \
     && apt remove \
-    && apt --yes autoremove
+    && apt --yes autoremove 
 
 # install qcad in /usr/local
 RUN wget -O /tmp/qcad.run \
@@ -44,5 +43,3 @@ RUN rm \
 
 USER qcad
 CMD ["/usr/local/bin/qcad"]
-
-
