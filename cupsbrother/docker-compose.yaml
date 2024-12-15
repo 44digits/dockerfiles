@@ -1,0 +1,7 @@
+services:
+  cupsdbro:
+    build: .
+    ports:
+      - "631:631"
+    volumes:
+      - /var/run/dbus:/var/run/dbus
