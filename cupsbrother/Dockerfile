@@ -3,9 +3,7 @@
 #   https://github.com/olbat/dockerfiles/blob/master/cupsd/Dockerfile.stable
 #   license GPL v3: https://github.com/olbat/dockerfiles/blob/master/LICENSE
 
-ARG MAINTAINER
 FROM debian:stable-slim
-MAINTAINER $MAINTAINER
 
 # Install Packages (basic tools, cups, basic drivers, HP drivers)
 RUN apt update \
