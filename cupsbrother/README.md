@@ -16,8 +16,7 @@ This manual step is required in order to agree to Brother's EULA.
 Installation steps:
 1. Download brother printer installer from https://www.brother-usa.com/brother-support/driver-downloads 
     and put in same directory as `Dockerfile`
-1. Build container with:  `docker build -t cupsbrother .`
-1. Launch container with: `docker run -d -p 631:631 -v /var/run/dbus:/var/run/dbus --name cupsbrother cupsbrother`
+1. Build and launch container with:  `docker-compose up --detach`
 1. Client/host setup:
 
     sudo apt install cups-client
